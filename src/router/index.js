@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import Create from '../views/Create.vue'
+import Update from '../views/Update.vue'
+import Test from '../views/Test.vue'
 
 Vue.use(VueRouter)
 
@@ -8,22 +11,46 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    meta:{
+      title:"หน้าแรก"
+    },
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/Create',
+    name: 'Create',
+    component: Create,
+    meta:{
+      title:"เพิ่มข้อมูล"
+    },
+  },
+  {
+    path: '/Update/:id',
+    name: 'Update',
+    component: Update,
+    meta:{
+      title:"แก้ไข"
+    },
+  },
+  {
+    path: '/Test',
+    name: 'Test',
+    component: Test,
+    meta:{
+      title:"Test"
+    },
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((to, from, next) =>{
+  document.title = `${to.meta.title}`;  
+  next();
+  })
 
 export default router
