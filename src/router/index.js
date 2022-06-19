@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Create from '../views/Create.vue'
 import Update from '../views/Update.vue'
-import Test from '../views/Test.vue'
 
 Vue.use(VueRouter)
 
@@ -30,14 +29,6 @@ const routes = [
     component: Update,
     meta:{
       title:"แก้ไข"
-    },
-  },
-  {
-    path: '/Test',
-    name: 'Test',
-    component: Test,
-    meta:{
-      title:"Test"
     },
   },
 ]

@@ -1,16 +1,15 @@
 <template>
-  <div>
+  <div class="create">
     <div class="container">
       <div class="row">
         <div class="col"></div>
-        <div class="col-12">
+        <div class="col-10">
           <form @submit.prevent="CreateForm">
             <h1>เพิ่มข้อมูล</h1>
             <hr />
-            <div class="row">
-              <div class="form-group">
-                <code> * </code><label for="brandId">เลือกยี่ห้อรถ</label>
-
+            <div class="row g-3">
+              <div class="col-md-6">
+                <code> * </code><label for="form-label">เลือกยี่ห้อรถ :</label>
                 <multiselect
                   v-model="applicant.brandId"
                   :options="viewbrand.map((viewbrand) => viewbrand.brandId)"
@@ -29,78 +28,82 @@
               </div>
 
               <div
-                class="form-group"
+                class="col-md-6"
                 :class="{ 'form-group--error': $v.applicant.modelCode.$error }"
               >
-                <label class="form__label">รหัสรุ่นรถ</label>
+                <code> * </code><label class="form__label">รหัสรุ่นรถ :</label>
                 <input
                   maxlength="20"
                   placeholder="รหัสรุ่นรถ"
                   class="form-control"
                   v-model.trim="$v.applicant.modelCode.$model"
                 />
-              </div>
-              <small
-                class="text-danger"
-                v-if="!$v.applicant.modelCode.required"
-              >
-                กรุณากรอกรหัสรุ่นรถ
-              </small>
-              <small
-                class="text-danger"
-                v-if="!$v.applicant.modelCode.minLength"
-              >
-                รหัสรุ่นรถต้องมีอย่างน้อย
-                {{ $v.applicant.modelCode.$params.minLength.min }} ตัวอักษร
-              </small>
-              <small
-                class="text-danger"
-                v-if="!$v.applicant.modelCode.maxLength"
-              >
-                รหัสรุ่นรถต้องไม่เกิน
-                {{ $v.applicant.modelCode.$params.maxLength.max }} ตัวอักษร
-              </small>
 
+                <small
+                  class="text-danger"
+                  v-if="!$v.applicant.modelCode.required"
+                >
+                  กรุณากรอกรหัสรุ่นรถ
+                </small>
+                <small
+                  class="text-danger"
+                  v-if="!$v.applicant.modelCode.minLength"
+                >
+                  รหัสรุ่นรถต้องมีอย่างน้อย
+                  {{ $v.applicant.modelCode.$params.minLength.min }} ตัวอักษร
+                </small>
+                <small
+                  class="text-danger"
+                  v-if="!$v.applicant.modelCode.maxLength"
+                >
+                  รหัสรุ่นรถต้องไม่เกิน
+                  {{ $v.applicant.modelCode.$params.maxLength.max }} ตัวอักษร
+                </small>
+              </div>
+            </div>
+            <div class="row g-3">
               <div
-                class="form-group"
+                class="col-md-5"
                 :class="{ 'form-group--error': $v.applicant.name.$error }"
               >
-                <label class="form__label">ชื่อรุ่นรถ</label>
+                <code> * </code><label class="form-label">ชื่อรุ่นรถ :</label>
                 <input
                   maxlength="45"
                   placeholder="รหัสรุ่นรถ"
                   class="form-control"
                   v-model.trim="$v.applicant.name.$model"
                 />
-              </div>
-              <small class="text-danger" v-if="!$v.applicant.name.required">
-                กรุณากรอกชื่อรุ่นรถ
-              </small>
-              <small class="text-danger" v-if="!$v.applicant.name.minLength">
-                ชื่อรุ่นรถต้องมีอย่างน้อย
-                {{ $v.applicant.name.$params.minLength.min }} ตัวอักษร
-              </small>
-              <small class="text-danger" v-if="!$v.applicant.name.maxLength">
-                ชื่อรุ่นรถต้องไม่เกิน
-                {{ $v.applicant.name.$params.maxLength.max }} ตัวอักษร
-              </small>
 
-              <div class="form-group">
-                <label for="exampleInputPassword1">ปีรถ</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="ModelYear"
+                <small class="text-danger" v-if="!$v.applicant.name.required">
+                  กรุณากรอกชื่อรุ่นรถ
+                </small>
+                <small class="text-danger" v-if="!$v.applicant.name.minLength">
+                  ชื่อรุ่นรถต้องมีอย่างน้อย
+                  {{ $v.applicant.name.$params.minLength.min }} ตัวอักษร
+                </small>
+                <small class="text-danger" v-if="!$v.applicant.name.maxLength">
+                  ชื่อรุ่นรถต้องไม่เกิน
+                  {{ $v.applicant.name.$params.maxLength.max }} ตัวอักษร
+                </small>
+              </div>
+
+              <div class="col-md-2">
+                <label class="form-label">ปีรถ :</label>
+                <multiselect
                   v-model="applicant.modelYear"
-                />
-                <small class="text-danger" v-if="!$v.applicant.modelYear.required">
-                กรุณาเลือกปีรถ
-              </small>
+                  :options="years"
+                  :multiple="false"
+                  :close-on-select="true"
+                  :clear-on-select="false"
+                  :preserve-search="true"
+                  placeholder="เลือกปีรถ"
+                  :preselect-first="true"
+                >
+                </multiselect>
               </div>
 
-              <div class="form-group">
-                <label for="exampleInputPassword1">การใช้น้ำมัน</label>
-                <div>
+              <div class="col-sm-5">
+                <code> * </code><label for="form-label">การใช้น้ำมัน :</label>
                   <b-form-radio-group
                     v-model="applicant.fuel"
                     :options="optionsfuel"
@@ -109,44 +112,45 @@
                     text-field="name"
                     disabled-field="notEnabled"
                   ></b-form-radio-group>
-                </div>
 
-                <br />
+                <small class="text-danger" v-if="!$v.applicant.fuel.required">
+                  กรุณาเลือกการใช้น้ำมัน
+                </small>
               </div>
-              <p
-                class="alert alert-success"
-                role="alert"
-                v-if="submitStatus === 'OK'"
-              >
-                ข้อมูลถูกต้อง
-              </p>
-              <p
-                class="alert alert-danger"
-                role="alert"
-                v-if="submitStatus === 'ERROR'"
-              >
-                กรุณากรอกแบบฟอร์มให้ถูกต้อง !!
-              </p>
-              <p
-                class="alert alert-primary"
-                role="alert"
-                v-if="submitStatus === 'PENDING'"
-              >
-                Loading...
-              </p>
-
-              <button
-                type="submit"
-                class="btn btn-primary"
-                :disabled="submitStatus === 'PENDING'"
-              >
-                Submit
-              </button>
-              &nbsp;&nbsp;
-              <button type="button" class="btn btn-danger" @click="Clear">
-                Clear
-              </button>
             </div>
+            <p
+              class="alert alert-success"
+              role="alert"
+              v-if="submitStatus === 'OK'"
+            >
+              ข้อมูลถูกต้อง
+            </p>
+            <p
+              class="alert alert-danger"
+              role="alert"
+              v-if="submitStatus === 'ERROR'"
+            >
+              กรุณากรอกแบบฟอร์มให้ถูกต้อง !!
+            </p>
+            <p
+              class="alert alert-primary"
+              role="alert"
+              v-if="submitStatus === 'PENDING'"
+            >
+              Loading...
+            </p>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              :disabled="submitStatus === 'PENDING'"
+            >
+              บันทึก
+            </button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" @click="Clear">
+              ล้างข้อมูล
+            </button>
           </form>
         </div>
         <div class="col"></div>
@@ -160,7 +164,7 @@ import axios from "axios";
 import Multiselect from "vue-multiselect";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
 export default {
-  name: "User",
+  name: "create",
   components: { Multiselect },
   data() {
     return {
@@ -168,14 +172,14 @@ export default {
       perPage: 5,
       viewfuel: "",
       viewbrand: [],
-      optionsfuel: [
-        { item: "D", name: " เบนซิน" },
-        { item: "S", name: " ดีเซล" },
-      ],
       loading: true,
       errored: false,
       url: "https://dms-backend-dev-dxvb7izyka-as.a.run.app",
       submitStatus: null,
+      optionsfuel: [
+        { item: "D", name: " ดีเซล" },
+        { item: "S", name: " เบนซิน" },
+      ],
       applicant: {
         brandId: "",
         modelCode: "",
@@ -201,7 +205,7 @@ export default {
         minLength: minLength(3),
         maxLength: maxLength(45),
       },
-      modelYear: {
+      fuel: {
         required,
       },
     },
@@ -210,6 +214,16 @@ export default {
   mounted() {
     this.Listbrand();
     this.Listfuel();
+  },
+
+  computed: {
+    years() {
+      const year = new Date().getFullYear();
+      return Array.from(
+        { length: year - 1900 },
+        (value, index) => 1901 + index
+      );
+    },
   },
 
   methods: {
@@ -231,7 +245,7 @@ export default {
         setTimeout(() => {
           this.submitStatus = "OK";
           axios
-            .post(this.url + "/api/vehicle-model/store?", {
+            .post(`${this.url}/api/vehicle-model/store?`, {
               brandId: this.applicant.brandId,
               modelCode: this.applicant.modelCode,
               name: this.applicant.name,
@@ -242,7 +256,7 @@ export default {
               this.$swal.fire({
                 icon: "success",
                 title: "Success",
-                text: `${response.message}`,
+                text: response.data.message,
               });
               this.$router.push({ name: "home" });
             })
@@ -260,7 +274,7 @@ export default {
 
     Listbrand() {
       axios
-        .get(this.url + "/api/vehicle-model/brand")
+        .get(`${this.url}/api/vehicle-model/brand`)
         .then((response) => {
           this.viewbrand = response.data;
           //console.log(this.viewbrand);
@@ -278,7 +292,7 @@ export default {
 
     Listfuel() {
       axios
-        .get(this.url + "/api/vehicle-model?", {
+        .get(`${this.url}/api/vehicle-model?`, {
           params: {
             page: this.page,
             perPage: this.perPage,

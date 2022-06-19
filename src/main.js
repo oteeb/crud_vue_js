@@ -12,6 +12,10 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Vuelidate from 'vuelidate'
+import VueSkeletonLoader from 'skeleton-loader-vue';
+
+// Register the component globally
+Vue.component('vue-skeleton-loader', VueSkeletonLoader);
 Vue.use(Vuelidate)
 
 Vue.use(BootstrapVue)

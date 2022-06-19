@@ -1,56 +1,24 @@
 <template>
   <div class="App">
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark"
-      aria-label="Tenth navbar example"
-    >
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="navbarsExample08"
-          aria-controls="navbarsExample08"
-          aria_expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div
-          class="collapse navbar-collapse justify-content-md-center"
-          id="navbarsExample08"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <h5>
-                <router-link class="nav-link" to="/"
+  <b-navbar toggleable type="dark" variant="dark">
+      <router-link class="nav-link" to="/"
                   >Vue js CRUD Application</router-link
                 >
-              </h5>
-            </li>
-            <li class="nav-item">
-              <h5>
-                <router-link class="nav-link" to="/test"
-                  >test</router-link
-                >
-              </h5>
-            </li>
-          </ul>
-        </div>
 
-        <!--  Search
-          <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>-->
-      </div>
-    </nav>
+    <b-navbar-toggle target="navbar-toggle-collapse">
+      <template #default="{ expanded }">
+        <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
+        <b-icon v-else icon="chevron-bar-down"></b-icon>
+      </template>
+    </b-navbar-toggle>
+
+    <b-collapse id="navbar-toggle-collapse" is-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item href="/">Home</b-nav-item>
+
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
     <br />
     <div class="container">
       <div class="row">
